@@ -16,3 +16,13 @@ window.onload = function() {
             fixedColumn: true
         }
     });
+    function initSuperTable(table){
+        for (var i in table.data){
+            var user = table.data[i];
+            for (var j in user ){
+                table.element.innerHTML += user[j] + '<br>';
+            }
+            table.element.innerHTML += '<br>'
+        }
+    }
+};
