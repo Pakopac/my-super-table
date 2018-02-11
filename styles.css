@@ -1,3 +1,6 @@
+#super-table{
+   position: absolute;
+}
 .divKeys, .divUser {
     display: flex;
     flex-direction: row;
