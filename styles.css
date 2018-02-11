@@ -1,17 +1,14 @@
-.divKeys {
+.divKeys, .divUser {
     display: flex;
     flex-direction: row;
-    font-weight: bold;
 }
-.divUser {
-    display: flex;
-    flex-direction: row;
+.divKeys {
+    font-weight: bold;
 }
 .id, .index, .name, .email, .gender, .isActive,
 .age, .eyeColor, .company, .phone, .address, .registered{
-    padding: 10px 10px 0;
+    padding: 3px;
     font-size: 20px;
-    height: 35px;
     text-align: center;
     border: 1px solid black;
 }

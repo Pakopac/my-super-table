@@ -10,6 +10,7 @@ window.onload = function() {
         data: users,
         options: {
             firstColumn: 'id',
+            rowHeight : '30px',
             rowMouseOver: true,
             rowStyle: 'zebra',
             fixedHeader: true,
@@ -48,9 +49,14 @@ window.onload = function() {
             }
         }
 
-        var firstColumn = document.querySelectorAll('.'+table.options.firstColumn);
-        for (var i in firstColumn){
+       var firstColumn = document.querySelectorAll('.'+table.options.firstColumn);
+        for (var i=0; i < firstColumn.length; i++){
             firstColumn[i].style.order = "-1";
+        }
+
+        var allLines = document.querySelectorAll('.divKeys'+', .divUser');
+         for (var i=0; i < allLines.length; i++){
+            allLines[i].style.height = table.options.rowHeight
         }
     }
 };
