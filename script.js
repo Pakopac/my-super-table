@@ -12,7 +12,7 @@ window.onload = function() {
             firstColumn: 'id',
             rowHeight : 30,
             rowMouseOver: true,
-            rowStyle: 'zebra',
+            rowStyle: 'free',
             fixedHeader: true,
             fixedColumn: true
         }
@@ -49,20 +49,40 @@ window.onload = function() {
             }
         }
 
+
        var firstColumn = document.querySelectorAll('.'+table.options.firstColumn);
         for (var i=0; i < firstColumn.length; i++){
             firstColumn[i].style.order = "-1";
         }
 
-        var allLines = document.querySelectorAll('.divKeys'+', .divUser');
+
+        var allLines = document.querySelectorAll('.divUser');
          for (var i=0; i < allLines.length; i++){
             allLines[i].style.height = table.options.rowHeight + "px";
+
+
              if (table.options.rowMouseOver === true){
                 allLines[i].onmouseover = function () {
                     this.style.background = 'grey'
-                }
+                };
                 allLines[i].onmouseout = function () {
-                    this.style.background = 'white'
+                    this.style.background = 'initial'
+                }
+             }
+
+
+             if (table.options.rowStyle === "line" || table.options.rowStyle === "zebra"){
+                 allLines[i].style.borderTop = '1px solid rgba(98, 98, 98, 0.30)'
+             }
+             if (table.options.rowStyle === "zebra"){
+                var evenLine = document.querySelectorAll('.divUser:nth-child(2n)');
+                for (var j=0; j < evenLine.length; j++){
+                    evenLine[j].style.background = 'rgba(98, 98, 98, 0.30)';
+                    if (table.options.rowMouseOver === true){
+                        evenLine[j].onmouseout = function () {
+                            this.style.background = 'rgba(98, 98, 98, 0.30)'
+                        }
+                    }
                 }
              }
         }
