@@ -9,7 +9,7 @@ window.onload = function() {
         element: superTable,
         data: users,
         options: {
-            firstColumn: 'email',
+            firstColumn: 'id',
             rowMouseOver: true,
             rowStyle: 'zebra',
             fixedHeader: true,
@@ -46,6 +46,11 @@ window.onload = function() {
                 divUser.appendChild(itemUser);
                 itemUser.innerHTML = user[j];
             }
+        }
+
+        var firstColumn = document.querySelectorAll('.'+table.options.firstColumn);
+        for (var i in firstColumn){
+            firstColumn[i].style.order = "-1";
         }
     }
 };
