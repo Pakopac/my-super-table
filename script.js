@@ -10,7 +10,7 @@ window.onload = function() {
         data: users,
         options: {
             firstColumn: 'id',
-            rowHeight : '30px',
+            rowHeight : '30',
             rowMouseOver: true,
             rowStyle: 'zebra',
             fixedHeader: true,
@@ -56,7 +56,7 @@ window.onload = function() {
 
         var allLines = document.querySelectorAll('.divKeys'+', .divUser');
          for (var i=0; i < allLines.length; i++){
-            allLines[i].style.height = table.options.rowHeight
+            allLines[i].style.height = table.options.rowHeight + "px"
         }
     }
 };
