@@ -1,51 +1,53 @@
 .divKeys {
     display: flex;
     flex-direction: row;
-    font-size: 20px;
     font-weight: bold;
+}
+.divUser {
+    display: flex;
+    flex-direction: row;
 }
 .id, .index, .name, .email, .gender, .isActive,
 .age, .eyeColor, .company, .phone, .address, .registered{
-    width: 10%;
-    height: 10%;
-    padding: 10px;
+    padding: 10px 10px 0;
+    font-size: 20px;
+    height: 35px;
     text-align: center;
     border: 1px solid black;
-    font-size: 40px;
 }
 .id{
-    flex: 4;
+    min-width: 250px;
 }
 .index{
-    flex: 1;
+    min-width: 50px;
 }
 .name{
-    flex: 3;
+    min-width: 200px;
 }
 .email{
-    flex: 4;
+    min-width: 300px;
 }
 .gender{
-    flex: 2;
+    min-width: 100px;
 }
 .isActive{
-    flex: 2;
+    min-width: 80px;
 }
 .age{
-    flex: 1;
+    min-width: 50px;
 }
 .eyeColor{
-    flex: 2;
+    min-width: 80px;
 }
 .company{
-    flex: 2;
+    min-width: 150px;
 }
 .phone{
-    flex: 3;
+    min-width: 200px;
 }
 .address{
-    flex: 5;
+    min-width: 550px;
 }
 .registered {
-    flex: 4;
+    min-width: 300px;
 }
