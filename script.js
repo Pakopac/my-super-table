@@ -33,7 +33,6 @@ window.onload = function() {
                 item.innerHTML += j;
             }
 
-
         for (var i in table.data) {
             user = table.data[i];
             var divUser = document.createElement('div');
@@ -84,6 +83,11 @@ window.onload = function() {
                         }
                     }
                 }
+             }
+             if(table.options.fixedHeader === true) {
+                 var LineKeys = document.querySelector('.divKeys');
+                 LineKeys.style.position = 'sticky';
+                 LineKeys.style.top = '-1px'
              }
         }
     }

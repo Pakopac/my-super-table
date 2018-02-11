@@ -1,11 +1,15 @@
 #super-table{
-   position: absolute;
+    left: -1px;
+    top: -1px;
+    position: absolute;
 }
 .divKeys, .divUser {
     display: flex;
     flex-direction: row;
 }
 .divKeys {
+    background: black;
+    color: white;
     font-weight: bold;
 }
 .id, .index, .name, .email, .gender, .isActive,
