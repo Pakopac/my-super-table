@@ -12,13 +12,14 @@ window.onload = function() {
             firstColumn: 'id',
             rowHeight : 30,
             rowMouseOver: true,
-            rowStyle: 'free',
+            rowStyle: 'zebra',
             fixedHeader: true,
             fixedColumn: true
         }
     });
     function initSuperTable(table){
         var divKeys = document.createElement('div');
+        divKeys.style.background = 'black';
         divKeys.classList.add("divKeys");
         table.element.appendChild(divKeys);
 
@@ -57,15 +58,16 @@ window.onload = function() {
 
         var allLines = document.querySelectorAll('.divUser');
          for (var i=0; i < allLines.length; i++){
+             allLines[i].style.background = 'white';
             allLines[i].style.height = table.options.rowHeight + "px";
 
 
              if (table.options.rowMouseOver === true){
                 allLines[i].onmouseover = function () {
-                    this.style.background = 'grey'
+                    this.style.background = '#5B5A55'
                 };
                 allLines[i].onmouseout = function () {
-                    this.style.background = 'initial'
+                    this.style.background = '#fff'
                 }
              }
 
@@ -76,18 +78,29 @@ window.onload = function() {
              if (table.options.rowStyle === "zebra"){
                 var evenLine = document.querySelectorAll('.divUser:nth-child(2n)');
                 for (var j=0; j < evenLine.length; j++){
-                    evenLine[j].style.background = 'rgba(98, 98, 98, 0.30)';
+                    evenLine[j].style.background = '#989898';
                     if (table.options.rowMouseOver === true){
                         evenLine[j].onmouseout = function () {
-                            this.style.background = 'rgba(98, 98, 98, 0.30)'
+                            this.style.background = '#989898'
                         }
                     }
                 }
              }
-             if(table.options.fixedHeader === true) {
-                 var LineKeys = document.querySelector('.divKeys');
-                 LineKeys.style.position = 'sticky';
-                 LineKeys.style.top = '-1px'
+        }
+
+        if(table.options.fixedHeader === true) {
+            var LineKeys = document.querySelector('.divKeys');
+            LineKeys.style.position = 'sticky';
+            LineKeys.style.top = '-1px'
+        }
+
+        if(table.options.fixedColumn === true){
+             for (var i=0; i < firstColumn.length; i++){
+                 firstColumn[i].style.position = 'sticky';
+                 firstColumn[i].style.borderRight = '1.5px solid rgba(98, 98, 98, 0.30)';
+                 firstColumn[i].style.background = firstColumn[i].parentElement.style.background;
+                 divKeys.style.zIndex = '1';
+                 firstColumn[i].style.left = '-1px';
              }
         }
     }
