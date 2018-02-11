@@ -17,10 +17,17 @@ window.onload = function() {
         }
     });
     function initSuperTable(table){
+        var divKeys = document.createElement('div');
+        divKeys.classList.add("divKeys");
+        table.element.appendChild(divKeys);
+
         for (var i in table.data){
             var user = table.data[i];
             for (var j in user ){
-                table.element.innerHTML += user[j] + '<br>';
+                var item = document.createElement('div');
+                item.classList.add(j);
+                divKeys.appendChild(item);
+                item.innerHTML += j;
             }
             table.element.innerHTML += '<br>'
         }
