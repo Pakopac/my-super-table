@@ -12,10 +12,11 @@ window.onload = function() {
             firstColumn: 'id',
             rowHeight : 30,
             rowMouseOver: true,
-            rowStyle: 'zebra',
+            rowStyle: 'free',
             fixedHeader: true,
             fixedColumn: true,
-            color : 'black'
+            color : 'black',
+            rowReverse: false
         }
     });
     function initSuperTable(table){
@@ -93,6 +94,10 @@ window.onload = function() {
                 }
              }
              allLines[i].style.color = table.options.color;
+             if (table.options.rowReverse){
+                 document.querySelector('.users').style.display = 'flex';
+                 document.querySelector('.users').style.flexWrap = 'wrap-reverse';
+             }
         }
 
         if(table.options.fixedHeader === true) {
