@@ -15,7 +15,7 @@ window.onload = function() {
             rowStyle: 'free',
             fixedHeader: true,
             fixedColumn: true,
-            color : 'black',
+            darkTheme : false,
             rowReverse: false
         }
     });
@@ -73,17 +73,22 @@ window.onload = function() {
                 allLines[i].onmouseover = function mouseOver() {
                     this.style.background = '#5B5A55'
                 };
-                allLines[i].onmouseout = function () {
+                if (table.options.darkTheme === true){
+                    allLines[i].onmouseout = function () {
+                        this.style.background = '#000'
+                    }
+                }
+                else allLines[i].onmouseout = function () {
                     this.style.background = '#fff'
                 }
              }
 
 
              if (table.options.rowStyle === "line" || table.options.rowStyle === "zebra"){
-                 allLines[i].style.borderTop = '1px solid rgba(98, 98, 98, 0.30)'
+                 allLines[i].style.borderTop = '1.5px solid rgba(98, 98, 98, 0.30)'
              }
              if (table.options.rowStyle === "zebra"){
-                var evenLine = document.querySelectorAll('.divUser:nth-child(2n)');
+                var evenLine = document.querySelectorAll('.divUser:nth-child(2n+1)');
                 for (var j=0; j < evenLine.length; j++){
                     evenLine[j].style.background = '#989898';
                     if (table.options.rowMouseOver === true){
@@ -93,7 +98,11 @@ window.onload = function() {
                     }
                 }
              }
-             allLines[i].style.color = table.options.color;
+             if(table.options.darkTheme === true){
+                 allLines[i].style.color = '#e3e3e3';
+                 allLines[i].style.background = 'black'
+             }
+
              if (table.options.rowReverse){
                  document.querySelector('.users').style.display = 'flex';
                  document.querySelector('.users').style.flexWrap = 'wrap-reverse';
@@ -103,13 +112,14 @@ window.onload = function() {
         if(table.options.fixedHeader === true) {
             var LineKeys = document.querySelector('.divKeys');
             LineKeys.style.position = 'sticky';
-            LineKeys.style.top = '-1px'
+            LineKeys.style.top = '-1px';
+            LineKeys.style.borderBottom = '1.5px solid rgba(98,98,98,0.5)'
         }
 
         if(table.options.fixedColumn === true){
              for (var i=0; i < firstColumn.length; i++){
                  firstColumn[i].style.position = 'sticky';
-                 firstColumn[i].style.borderRight = '1.5px solid rgba(98, 98, 98, 0.30)';
+                 firstColumn[i].style.borderRight = '1.5px solid rgba(98, 98, 98, 0.50)';
                  firstColumn[i].style.background = firstColumn[i].parentElement.style.background;
                  console.log(firstColumn[i].parentElement.style.background.onchange);
                  if (firstColumn[i].parentElement.onmouseover === null){
