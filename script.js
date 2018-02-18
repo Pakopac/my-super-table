@@ -56,8 +56,7 @@ window.onload = function() {
             }
         }
 
-
-       var firstColumn = document.querySelectorAll('.'+table.options.firstColumn);
+        var firstColumn = document.querySelectorAll('.' + table.options.firstColumn);
         for (var i=0; i < firstColumn.length; i++){
             firstColumn[i].style.order = "-1";
         }
@@ -68,10 +67,18 @@ window.onload = function() {
              allLines[i].style.background = 'white';
             allLines[i].style.height = table.options.rowHeight + "px";
 
-             if (table.options.rowMouseOver === true || typeof(table.options.rowMouseOver) === 'undefined'){
+             if (table.options.rowMouseOver !== false){
                 allLines[i].onmouseover = function mouseOver() {
-                    for (j=0; j < firstColumn.length; j++){
-                        firstColumn[j].style.background = 'inherit'
+                    if(table.options.fixedColumn !== false && typeof(firstColumn[i]) !== 'undefined') {
+                        for (j = 0; j < firstColumn.length; j++) {
+                            firstColumn[j].style.background = 'inherit'
+                        }
+                    }
+                    else{
+                        var id = document.querySelectorAll('.id');
+                        for (j = 0; j < id.length; j++) {
+                            id[j].style.background = 'inherit'
+                        }
                     }
                     this.style.background = '#5B5A55';
                 };
@@ -128,10 +135,10 @@ window.onload = function() {
                 firstColumn[i].style.left = '-1px';
                 }
         }
-        if(table.options.fixedColumn === true){
+        if(table.options.fixedColumn !== false && typeof(firstColumn[i]) !== 'undefined'){
            fixedColumn(firstColumn)
         }
-        else if (typeof(table.options.fixedColumn) === 'undefined'){
+        else if (table.options.fixedColumn !== false && typeof(firstColumn[i]) === 'undefined'){
              fixedColumn(document.querySelectorAll('.id'))
         }
     }
