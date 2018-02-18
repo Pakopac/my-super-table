@@ -4,6 +4,7 @@
     position: absolute;
 }
 .divKeys, .divUser {
+    height: 30px;
     display: flex;
     flex-direction: row;
 }

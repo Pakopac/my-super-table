@@ -68,8 +68,7 @@ window.onload = function() {
              allLines[i].style.background = 'white';
             allLines[i].style.height = table.options.rowHeight + "px";
 
-
-             if (table.options.rowMouseOver === true){
+             if (table.options.rowMouseOver === true || typeof(table.options.rowMouseOver) === 'undefined'){
                 allLines[i].onmouseover = function mouseOver() {
                     this.style.background = '#5B5A55'
                 };
@@ -99,6 +98,8 @@ window.onload = function() {
                 }
              }
              if(table.options.darkTheme === true){
+                 divKeys.style.background = '#e3e3e3';
+                 divKeys.style.color = 'black';
                  allLines[i].style.color = '#e3e3e3';
                  allLines[i].style.background = 'black'
              }
@@ -109,25 +110,29 @@ window.onload = function() {
              }
         }
 
-        if(table.options.fixedHeader === true) {
+        if(table.options.fixedHeader !== false) {
             var LineKeys = document.querySelector('.divKeys');
             LineKeys.style.position = 'sticky';
             LineKeys.style.top = '-1px';
             LineKeys.style.borderBottom = '1.5px solid rgba(98,98,98,0.5)'
         }
-
+        function fixedColumn(firstColumn) {
+            for (var i=0; i < firstColumn.length; i++){
+                firstColumn[i].style.position = 'sticky';
+                firstColumn[i].style.borderRight = '1.5px solid rgba(98, 98, 98, 0.50)';
+                firstColumn[i].style.background = firstColumn[i].parentElement.style.background;
+                if (firstColumn[i].parentElement.onmouseover === null){
+                    firstColumn[i].style.background = firstColumn[i].parentElement.style.background
+                }
+                divKeys.style.zIndex = '1';
+                firstColumn[i].style.left = '-1px';
+            }
+        }
         if(table.options.fixedColumn === true){
-             for (var i=0; i < firstColumn.length; i++){
-                 firstColumn[i].style.position = 'sticky';
-                 firstColumn[i].style.borderRight = '1.5px solid rgba(98, 98, 98, 0.50)';
-                 firstColumn[i].style.background = firstColumn[i].parentElement.style.background;
-                 console.log(firstColumn[i].parentElement.style.background.onchange);
-                 if (firstColumn[i].parentElement.onmouseover === null){
-                     firstColumn[i].style.background = firstColumn[i].parentElement.style.background
-                 }
-                 divKeys.style.zIndex = '1';
-                 firstColumn[i].style.left = '-1px';
-             }
+           fixedColumn(firstColumn)
+        }
+        else if (typeof(table.options.fixedColumn) === 'undefined'){
+             fixedColumn(document.querySelectorAll('.id'))
         }
     }
 };
