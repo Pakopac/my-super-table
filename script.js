@@ -70,7 +70,10 @@ window.onload = function() {
 
              if (table.options.rowMouseOver === true || typeof(table.options.rowMouseOver) === 'undefined'){
                 allLines[i].onmouseover = function mouseOver() {
-                    this.style.background = '#5B5A55'
+                    for (j=0; j < firstColumn.length; j++){
+                        firstColumn[j].style.background = 'inherit'
+                    }
+                    this.style.background = '#5B5A55';
                 };
                 if (table.options.darkTheme === true){
                     allLines[i].onmouseout = function () {
@@ -104,7 +107,7 @@ window.onload = function() {
                  allLines[i].style.background = 'black'
              }
 
-             if (table.options.rowReverse){
+             if (table.options.rowReverse === true){
                  document.querySelector('.users').style.display = 'flex';
                  document.querySelector('.users').style.flexWrap = 'wrap-reverse';
              }
@@ -121,12 +124,9 @@ window.onload = function() {
                 firstColumn[i].style.position = 'sticky';
                 firstColumn[i].style.borderRight = '1.5px solid rgba(98, 98, 98, 0.50)';
                 firstColumn[i].style.background = firstColumn[i].parentElement.style.background;
-                if (firstColumn[i].parentElement.onmouseover === null){
-                    firstColumn[i].style.background = firstColumn[i].parentElement.style.background
-                }
                 divKeys.style.zIndex = '1';
                 firstColumn[i].style.left = '-1px';
-            }
+                }
         }
         if(table.options.fixedColumn === true){
            fixedColumn(firstColumn)
