@@ -1,9 +1,38 @@
-#super-table{
-    left: -1px;
-    top: -1px;
-    position: absolute;
+body{
+    background: #2f2f2f;
 }
+.title{
+    font-size: 7vw;
+    color: white;
+    margin-left: 35vw;
+    font-family: Calibri;
+}
+#super-table{
+    background: white;
+    position: absolute;
+    overflow: scroll;
+    height: 65vh;
+    width: 60vw;
+    top: 25vh;
+    left: 20vw;
+}
+::-webkit-scrollbar{
+    background: white
+}
+::-webkit-scrollbar-thumb{
+    background: grey;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: black;
+}
+::-webkit-scrollbar-track{
+    background: #cacaca;
+    border-radius: 10px;
+}
+
 .divKeys, .divUser {
+    width: 2395px;
     height: 30px;
     display: flex;
     flex-direction: row;
