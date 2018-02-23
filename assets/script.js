@@ -15,7 +15,7 @@ window.onload = function() {
             rowStyle: 'free',
             fixedHeader: true,
             fixedColumn: true,
-            darkTheme: true,
+            darkTheme: false,
             cellMouseOver : true
         }
     });
