@@ -15,8 +15,8 @@ window.onload = function() {
             rowStyle: 'free',
             fixedHeader: true,
             fixedColumn: true,
-            darkTheme: false,
-            caseMouseOver : true
+            darkTheme: true,
+            cellMouseOver : true
         }
     });
 
@@ -48,8 +48,8 @@ window.onload = function() {
         if(table.options.darkTheme === true){
             darkTheme()
         }
-        if(table.options.caseMouseOver !== false) {
-            caseMouseOver(table)
+        if(table.options.cellMouseOver !== false) {
+            cellMouseOver(table)
         }
     }
     function createLineKeys(table) {
@@ -161,8 +161,6 @@ window.onload = function() {
 
     function darkTheme(){
         LineKeys = document.querySelector('.divKeys');
-        document.querySelector('body').style.background = '#989898';
-        document.querySelector('.title').style.color = 'black';
         LineKeys.classList.add('darkThemeKeys');
         allLines = document.querySelectorAll('.divUser');
         for (var i=0; i < allLines.length; i++) {
@@ -170,7 +168,7 @@ window.onload = function() {
         }
     }
     
-    function caseMouseOver(table) {
+    function cellMouseOver(table) {
         item = document.querySelectorAll('.item');
         for (var i in item){
             item[i].onmouseover = function () {
