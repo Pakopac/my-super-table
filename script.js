@@ -9,72 +9,104 @@ window.onload = function() {
         element: superTable,
         data: users,
         options: {
-            firstColumn: 'id',
-            rowHeight : 30,
+            firstColumn: 'name',
+            rowHeight: 30,
             rowMouseOver: true,
             rowStyle: 'free',
             fixedHeader: true,
             fixedColumn: true,
-            darkTheme : false,
+            darkTheme: false,
             rowReverse: false
         }
     });
-    function initSuperTable(table){
+
+    function initSuperTable(table) {
+        createLineKeys(table);
+        createTable(table);
+        firstColumn(table);
+        rowHeight(table);
+        var getFirstColumn = document.querySelectorAll('.' + table.options.firstColumn);
+        if(table.options.rowMouseOver !== false) {
+            rowMouseOver(table, getFirstColumn)
+        }
+        if(table.options.rowStyle === "line" || table.options.rowStyle === "zebra") {
+            rowStyleLine(table)
+        }
+        if(table.options.rowStyle === "zebra"){
+            rowStyleZebra(table)
+        }
+        if(table.options.fixedHeader !== false) {
+            fixedHeader(table)
+        }
+        if(table.options.fixedColumn !== false){
+            fixedColumn(table, getFirstColumn)
+        }
+        if(table.options.darkTheme === true){
+            darkTheme(table)
+        }
+        if(table.options.rowReverse === true){
+            rowReverse(table)
+        }
+    }
+
+    function createLineKeys(table) {
         var divKeys = document.createElement('div');
-        divKeys.style.background = 'black';
         divKeys.classList.add("divKeys");
         table.element.appendChild(divKeys);
-
-
         for (var i in table.data) {
             var user = table.data[i];
         }
-            for (var j in user) {
-                var item = document.createElement('div');
-                item.classList.add(j);
-                divKeys.appendChild(item);
-                item.innerHTML += j;
-            }
-        var users = document.createElement('div');
-        table.element.appendChild(users);
-        users.classList.add('users');
+        for (var j in user) {
+            var item = document.createElement('div');
+            divKeys.appendChild(item);
+            item.classList.add(j);
+            item.innerHTML += j;
+        }
+    }
 
+    function createTable(table) {
+        var allUsers = document.createElement('div');
+        allUsers.classList.add('allUsers');
+        table.element.appendChild(allUsers);
         for (var i in table.data) {
             user = table.data[i];
+            var line = document.createElement('div');
+            line.classList.add('divUser');
 
-            var divUser = document.createElement('div');
-            divUser.classList.add("divUser");
-
-            users.appendChild(divUser);
-            divUser.innerHTML += '<br>';
-
-            for (var j in user){
-                var itemUser = document.createElement('div');
-                itemUser.classList.add(j);
-                divUser.appendChild(itemUser);
-                itemUser.innerHTML = user[j];
+            for (var j in user) {
+                allUsers.appendChild(line)
+                item = document.createElement('div');
+                line.appendChild(item);
+                item.innerHTML += user[j]
+                item.classList.add(j)
             }
         }
+    }
 
-        var firstColumn = document.querySelectorAll('.' + table.options.firstColumn);
-        for (var i=0; i < firstColumn.length; i++){
-            firstColumn[i].style.order = "-1";
+    function firstColumn(table) {
+        var getFirstColumn = document.querySelectorAll('.' + table.options.firstColumn);
+        for (var i = 0; i < getFirstColumn.length; i++) {
+            getFirstColumn[i].classList.add('firstColumn');
         }
+    }
 
-
+    function rowHeight(table) {
         var allLines = document.querySelectorAll('.divUser');
-         for (var i=0; i < allLines.length; i++){
-             allLines[i].style.background = 'white';
+        for (var i = 0; i < allLines.length; i++) {
             allLines[i].style.height = table.options.rowHeight + "px";
+        }
+    }
 
-             if (table.options.rowMouseOver !== false){
-                allLines[i].onmouseover = function mouseOver() {
-                    if(table.options.fixedColumn !== false && typeof(firstColumn[i]) !== 'undefined') {
-                        for (j = 0; j < firstColumn.length; j++) {
-                            firstColumn[j].style.background = 'inherit'
+    function rowMouseOver(table, getFirstColumn) {
+        allLines = document.querySelectorAll('.divUser')
+        for (var i = 0; i < allLines.length; i++) {
+                allLines[i].onmouseover = function() {
+                    if (table.options.fixedColumn !== false && typeof(getFirstColumn[i]) !== 'undefined') {
+                        for (j = 0; j < getFirstColumn.length; j++) {
+                            getFirstColumn[j].style.background = 'inherit'
                         }
                     }
-                    else{
+                    else {
                         var id = document.querySelectorAll('.id');
                         for (j = 0; j < id.length; j++) {
                             id[j].style.background = 'inherit'
@@ -82,7 +114,7 @@ window.onload = function() {
                     }
                     this.style.background = '#5B5A55';
                 };
-                if (table.options.darkTheme === true){
+                if (table.options.darkTheme === true) {
                     allLines[i].onmouseout = function () {
                         this.style.background = '#000'
                     }
@@ -90,58 +122,55 @@ window.onload = function() {
                 else allLines[i].onmouseout = function () {
                     this.style.background = '#fff'
                 }
-             }
-
-
-             if (table.options.rowStyle === "line" || table.options.rowStyle === "zebra"){
-                 allLines[i].style.borderTop = '1.5px solid rgba(98, 98, 98, 0.30)'
-             }
-             if (table.options.rowStyle === "zebra"){
-                var evenLine = document.querySelectorAll('.divUser:nth-child(2n+1)');
-                for (var j=0; j < evenLine.length; j++){
-                    evenLine[j].style.background = '#989898';
-                    if (table.options.rowMouseOver === true){
-                        evenLine[j].onmouseout = function () {
-                            this.style.background = '#989898'
-                        }
-                    }
-                }
-             }
-             if(table.options.darkTheme === true){
-                 document.querySelector('body').style.background = '#989898';
-                 document.querySelector('.title').style.color = 'black';
-                 divKeys.style.background = '#e3e3e3';
-                 divKeys.style.color = 'black';
-                 allLines[i].style.color = '#e3e3e3';
-                 allLines[i].style.background = 'black'
-             }
-
-             if (table.options.rowReverse === true){
-                 document.querySelector('.users').style.display = 'flex';
-                 document.querySelector('.users').style.flexWrap = 'wrap-reverse';
-             }
-        }
-
-        if(table.options.fixedHeader !== false) {
-            var LineKeys = document.querySelector('.divKeys');
-            LineKeys.style.position = 'sticky';
-            LineKeys.style.top = '0';
-            LineKeys.style.borderBottom = '1.5px solid rgba(98,98,98,0.5)'
-        }
-        function fixedColumn(firstColumn) {
-            for (var i=0; i < firstColumn.length; i++){
-                firstColumn[i].style.position = 'sticky';
-                firstColumn[i].style.borderRight = '1.5px solid rgba(98, 98, 98, 0.50)';
-                firstColumn[i].style.background = firstColumn[i].parentElement.style.background;
-                divKeys.style.zIndex = '1';
-                firstColumn[i].style.left = '0';
-                }
-        }
-        if(table.options.fixedColumn !== false && typeof(firstColumn[i]) !== 'undefined'){
-           fixedColumn(firstColumn)
-        }
-        else if (table.options.fixedColumn !== false && typeof(firstColumn[i]) === 'undefined'){
-             fixedColumn(document.querySelectorAll('.id'))
+            }
+    }
+    
+    function rowStyleLine(table) {
+        allLines = document.querySelectorAll('.divUser');
+        for (var i=0; i < allLines.length; i++) {
+            allLines[i].classList.add('styleLine');
         }
     }
-};
+    
+    function rowStyleZebra(table) {
+            var evenLine = document.querySelectorAll('.divUser:nth-child(2n+1)');
+            for (var j=0; j < evenLine.length; j++){
+                evenLine[j].style.background = '#989898';
+                if (table.options.rowMouseOver === true){
+                    evenLine[j].onmouseout = function () {
+                        this.style.background = '#989898'
+                    }
+                }
+            }
+    }
+
+    function fixedHeader(table){
+        var LineKeys = document.querySelector('.divKeys');
+        LineKeys.classList.add('fixedHeader')
+    }
+
+    function fixedColumn(table, getFirstColumn) {
+        var LineKeys = document.querySelector('.divKeys');
+        for (var i=0; i < getFirstColumn.length; i++){
+            getFirstColumn[i].classList.add('fixedColumn');
+            getFirstColumn[i].style.background = getFirstColumn[i].parentElement.style.background;
+            LineKeys.style.zIndex = '1';
+        }
+    }
+
+    function darkTheme(table){
+        LineKeys = document.querySelector('.divKeys');
+        document.querySelector('body').style.background = '#989898';
+        document.querySelector('.title').style.color = 'black';
+        LineKeys.classList.add('darkThemeKeys');
+        allLines = document.querySelectorAll('.divUser');
+        for (var i=0; i < allLines.length; i++) {
+            allLines[i].classList.add('darkThemeLines')
+        }
+    }
+
+    function rowReverse(table){
+        allUsers = document.querySelector('.allUsers');
+        allUsers.classList.add('rowReverse')
+    }
+}

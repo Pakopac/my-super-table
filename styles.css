@@ -37,6 +37,9 @@ body{
     display: flex;
     flex-direction: row;
 }
+.divUser {
+    background: white;
+}
 .divKeys {
     background: black;
     color: white;
@@ -83,4 +86,36 @@ body{
 }
 .registered {
     min-width: 300px;
+}
+.firstColumn{
+    order: -1;
+}
+.styleLine{
+    border-top: 1.5px solid rgba(98, 98, 98, 0.30);
+}
+.styleZebra{
+    background: #989898;
+}
+.fixedHeader{
+    position: sticky;
+    top: 0;
+    border-bottom: 1.5px solid rgba(98,98,98,0.5);
+}
+.fixedColumn{
+    background: inherit;
+    position: sticky;
+    left: 0;
+    border-right: 1.5px solid rgba(98, 98, 98, 0.50);
+}
+.darkThemeKeys{
+    background: #e3e3e3;
+    color: black;
+}
+.darkThemeLines{
+    background: black;
+    color: #e3e3e3;
+}
+.rowReverse{
+    display: flex;
+    flex-wrap: wrap-reverse;
 }
