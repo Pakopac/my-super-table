@@ -16,7 +16,7 @@ window.onload = function() {
             fixedHeader: true,
             fixedColumn: true,
             darkTheme: false,
-            rowReverse: false
+            caseMouseOver : true
         }
     });
 
@@ -48,8 +48,8 @@ window.onload = function() {
         if(table.options.darkTheme === true){
             darkTheme()
         }
-        if(table.options.rowReverse === true){
-            rowReverse()
+        if(table.options.caseMouseOver !== false) {
+            caseMouseOver(table)
         }
     }
     function createLineKeys(table) {
@@ -79,7 +79,7 @@ window.onload = function() {
                 item = document.createElement('div');
                 line.appendChild(item);
                 item.innerHTML += user[j];
-                item.classList.add(j)
+                item.classList.add(j, 'item')
             }
         }
     }
@@ -104,13 +104,13 @@ window.onload = function() {
                 allLines[i].onmouseover = function() {
                     if (table.options.fixedColumn !== false && typeof(getFirstColumn[i]) !== 'undefined') {
                         for (j = 0; j < getFirstColumn.length; j++) {
-                            getFirstColumn[j].style.background = 'inherit'
+                            getFirstColumn[j].classList.add('inherit')
                         }
                     }
                     else {
                         var id = document.querySelectorAll('.id');
                         for (j = 0; j < id.length; j++) {
-                            id[j].style.background = 'inherit'
+                            id[j].classList.add('inherit')
                         }
                     }
                     this.style.background = '#5B5A55';
@@ -169,9 +169,25 @@ window.onload = function() {
             allLines[i].classList.add('darkThemeLines')
         }
     }
+    
+    function caseMouseOver(table) {
+        item = document.querySelectorAll('.item');
+        for (var i in item){
+            item[i].onmouseover = function () {
+                if (table.options.darkTheme === true){
+                    this.style.background = 'white';
+                    this.style.color = 'black';
+                }
+                else {
 
-    function rowReverse(){
-        allUsers = document.querySelector('.allUsers');
-        allUsers.classList.add('rowReverse')
+                    this.style.background = 'black';
+                    this.style.color = 'white'
+                }
+            };
+            item[i].onmouseout = function () {
+                this.style.color = 'inherit';
+                this.style.background = 'inherit'
+            }
+        }
     }
 };

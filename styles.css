@@ -119,6 +119,9 @@ body{
     display: flex;
     flex-wrap: wrap-reverse;
 }
+.inherit{
+    background: inherit;
+}
 
 @media (min-width: 1024px) {
     #super-table {
