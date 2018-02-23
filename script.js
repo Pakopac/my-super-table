@@ -9,7 +9,7 @@ window.onload = function() {
         element: superTable,
         data: users,
         options: {
-            firstColumn: 'name',
+            firstColumn: 'id',
             rowHeight: 30,
             rowMouseOver: true,
             rowStyle: 'free',
@@ -30,32 +30,33 @@ window.onload = function() {
             rowMouseOver(table, getFirstColumn)
         }
         if(table.options.rowStyle === "line" || table.options.rowStyle === "zebra") {
-            rowStyleLine(table)
+            rowStyleLine()
         }
         if(table.options.rowStyle === "zebra"){
             rowStyleZebra(table)
         }
         if(table.options.fixedHeader !== false) {
-            fixedHeader(table)
+            fixedHeader()
         }
-        if(table.options.fixedColumn !== false){
+        if(table.options.fixedColumn === true){
             fixedColumn(table, getFirstColumn)
         }
+        else if(table.options.fixedColumn !== true && table.options.fixedColumn !== false){
+            var id = document.querySelectorAll('.id');
+            fixedColumn(table, id)
+        }
         if(table.options.darkTheme === true){
-            darkTheme(table)
+            darkTheme()
         }
         if(table.options.rowReverse === true){
-            rowReverse(table)
+            rowReverse()
         }
     }
-
     function createLineKeys(table) {
         var divKeys = document.createElement('div');
         divKeys.classList.add("divKeys");
         table.element.appendChild(divKeys);
-        for (var i in table.data) {
-            var user = table.data[i];
-        }
+        var user = table.data[0];
         for (var j in user) {
             var item = document.createElement('div');
             divKeys.appendChild(item);
@@ -74,10 +75,10 @@ window.onload = function() {
             line.classList.add('divUser');
 
             for (var j in user) {
-                allUsers.appendChild(line)
+                allUsers.appendChild(line);
                 item = document.createElement('div');
                 line.appendChild(item);
-                item.innerHTML += user[j]
+                item.innerHTML += user[j];
                 item.classList.add(j)
             }
         }
@@ -91,14 +92,14 @@ window.onload = function() {
     }
 
     function rowHeight(table) {
-        var allLines = document.querySelectorAll('.divUser');
-        for (var i = 0; i < allLines.length; i++) {
+        allLines = document.querySelectorAll('.divUser');
+        for (var i=0; i < allLines.length; i++) {
             allLines[i].style.height = table.options.rowHeight + "px";
         }
     }
 
     function rowMouseOver(table, getFirstColumn) {
-        allLines = document.querySelectorAll('.divUser')
+        allLines = document.querySelectorAll('.divUser');
         for (var i = 0; i < allLines.length; i++) {
                 allLines[i].onmouseover = function() {
                     if (table.options.fixedColumn !== false && typeof(getFirstColumn[i]) !== 'undefined') {
@@ -124,14 +125,14 @@ window.onload = function() {
                 }
             }
     }
-    
-    function rowStyleLine(table) {
+
+    function rowStyleLine() {
         allLines = document.querySelectorAll('.divUser');
         for (var i=0; i < allLines.length; i++) {
             allLines[i].classList.add('styleLine');
         }
     }
-    
+
     function rowStyleZebra(table) {
             var evenLine = document.querySelectorAll('.divUser:nth-child(2n+1)');
             for (var j=0; j < evenLine.length; j++){
@@ -144,13 +145,13 @@ window.onload = function() {
             }
     }
 
-    function fixedHeader(table){
+    function fixedHeader(){
         var LineKeys = document.querySelector('.divKeys');
         LineKeys.classList.add('fixedHeader')
     }
 
     function fixedColumn(table, getFirstColumn) {
-        var LineKeys = document.querySelector('.divKeys');
+        LineKeys = document.querySelector('.divKeys');
         for (var i=0; i < getFirstColumn.length; i++){
             getFirstColumn[i].classList.add('fixedColumn');
             getFirstColumn[i].style.background = getFirstColumn[i].parentElement.style.background;
@@ -158,7 +159,7 @@ window.onload = function() {
         }
     }
 
-    function darkTheme(table){
+    function darkTheme(){
         LineKeys = document.querySelector('.divKeys');
         document.querySelector('body').style.background = '#989898';
         document.querySelector('.title').style.color = 'black';
@@ -169,8 +170,8 @@ window.onload = function() {
         }
     }
 
-    function rowReverse(table){
+    function rowReverse(){
         allUsers = document.querySelector('.allUsers');
         allUsers.classList.add('rowReverse')
     }
-}
+};
