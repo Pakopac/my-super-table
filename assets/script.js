@@ -177,7 +177,6 @@ window.onload = function() {
                     this.style.color = 'black';
                 }
                 else {
-
                     this.style.background = 'black';
                     this.style.color = 'white'
                 }
